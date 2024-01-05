@@ -32,32 +32,32 @@ public class AdminController {
     }
 
     @GetMapping("/new")
-    public String newUser(Model model, @ModelAttribute("user") User user) {
+    public String getNewUserPage(Model model, @ModelAttribute("user") User user) {
         model.addAttribute("rolesAtt", roleRepo.findAll());
         return "new";
     }
 
     @PostMapping
-    public String create(@ModelAttribute("user") User user) {
+    public String createUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
         return "redirect:/admin";
     }
 
     @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") long id) {
+    public String editUserPage(Model model, @PathVariable("id") long id) {
         model.addAttribute("user", userService.showUser(id));
         model.addAttribute("rolesAtt", roleRepo.findAll());
         return "edit";
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") User user) {
+    public String updateUser(@ModelAttribute("user") User user) {
         userService.updateUser(user);
         return "redirect:/admin";
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") long id) {
+    public String deleteUser(@PathVariable("id") long id) {
         userService.removeUserById(id);
         return "redirect:/admin";
     }
