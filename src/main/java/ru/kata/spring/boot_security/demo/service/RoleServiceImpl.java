@@ -3,8 +3,8 @@ package ru.kata.spring.boot_security.demo.service;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -17,6 +17,7 @@ public class RoleServiceImpl implements RoleService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Role getByName(String name) {
         return roleRepository.findByName(name);
     }
@@ -29,6 +30,7 @@ public class RoleServiceImpl implements RoleService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Role> getAll() {
         return roleRepository.findAll();
     }
